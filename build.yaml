@@ -29,8 +29,11 @@ include:
 #  - board: nice_nano
 #    shield: cradio_right
   - board: nice_nano//zmk
+    snippet: zmk-usb-logging
     shield: cradio_left
   - board: nice_nano//zmk
+    snippet: zmk-usb-logging
     shield: cradio_right
   - board: nice_nano//zmk
     shield: settings_reset
+
