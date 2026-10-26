@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: janpfischer
       url-base: https://github.com/janpfischer
+    - name: krikun98
+      url-base: https://github.com/krikun98
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
@@ -16,5 +18,9 @@ manifest:
     - name: zmk-dongle-screen
       remote: janpfischer
       revision: upgrade-4.1
+    - name: zmk-mouse
+      remote: krikun98
+      revision: mouse-pr
+      import: app/west.yml
   self:
     path: config
