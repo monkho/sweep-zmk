@@ -2,8 +2,8 @@ manifest:
   defaults:
     revision: main
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+#    - name: zmkfirmware
+#      url-base: https://github.com/zmkfirmware
     - name: janpfischer
       url-base: https://github.com/janpfischer
     - name: krikun98
