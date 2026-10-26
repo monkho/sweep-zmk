@@ -18,7 +18,7 @@ manifest:
     - name: zmk-dongle-screen
       remote: janpfischer
       revision: upgrade-4.1
-    - name: zmk-mouse
+    - name: zmk
       remote: krikun98
       revision: mouse-pr
       import: app/west.yml
