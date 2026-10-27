@@ -113,7 +113,7 @@
           &bootloader  &trans    &trans    &trans    &bt BT_SEL 1      &mmv MOVE_DOWN    &mmv MOVE_DOWN   &mmv MOVE_RIGHT   &trans    &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │ Scroll up    │ Scroll dw       │          │          │          │
-            &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &msc SCRL_UP   &msc SCRL_DOWN     &trans     &trans     &trans
+            &studio_unlock     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &msc SCRL_UP   &msc SCRL_DOWN     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
