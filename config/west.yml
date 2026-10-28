@@ -13,8 +13,5 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-dongle-screen
-      remote: janpfischer
-      revision: upgrade-4.1
   self:
     path: config
