@@ -4,12 +4,12 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/pointing.h>
 
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
+#define MEDIA(k1,k2,k3,k4,k5) &kp k1 &kp k2 &kp k3 &kp k4 &kp k5
 
 &mmv {
     x-input-code = <INPUT_REL_X>;
@@ -91,11 +91,11 @@
         //│          │  [       │  {       │  }       │    ]     │   │  ^       │  (       │  )       │  ]       │  ~       │
             &trans     &kp LBKT   &kp LBRC   &kp RBRC   &kp RBKT       &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  !       │  @       │  #       │  $       │  %       │   │  *       │  -       │  =       │  \       │  `       │
-            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp GRAVE
+        //│  !       │  @       │  #       │  $       │  %       │   │  *       │  -       │  =       │  \       │  '"      │
+            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp SQT
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │          │          │   │  &       │  _       │  +       │  │       │          │
-            &trans     &trans     &trans     &trans     &trans         &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
+        //│          │          │          │          │          │   │  &       │  _       │  +       │  │       │  `       │
+       MEDIA(C_VOL_DN, C_VOL_UP,   C_PREV,     C_PP,    C_NEXT)       &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &kp GRAVE
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -107,10 +107,10 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ RESET    │          │          │          │PROFILE 0 │   │ Left clk │ Mouse up     │ Right clk│          │  RESET   │
-           &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &mkp MB1   &mmv MOVE_UP   &mkp MB2   &trans    &sys_reset
+           &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &mkp MB1   &mmv MOVE_UP   &mkp MB2   &sys_reset
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │          │PROFILE 1 │   │ Mouse lf        │ Mouse do       │ Mouse ri        │          │BOOTLOADER│
-          &bootloader  &trans    &trans    &trans    &bt BT_SEL 1      &mmv MOVE_DOWN    &mmv MOVE_DOWN   &mmv MOVE_RIGHT   &trans    &bootloader
+          &bootloader  &trans    &trans    &trans    &bt BT_SEL 1      &trans     &mmv MOVE_LEFT    &mmv MOVE_DOWN   &mmv MOVE_RIGHT   &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │ CLEAR BT │PROFILE 2 │   │ Scroll up    │ Scroll dw       │          │          │          │
             &studio_unlock     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &msc SCRL_UP   &msc SCRL_DOWN     &trans     &trans     &trans

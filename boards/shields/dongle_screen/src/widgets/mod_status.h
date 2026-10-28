@@ -7,7 +7,9 @@ struct zmk_widget_mod_status
 {
     sys_snode_t node;
     lv_obj_t *obj;
-    lv_obj_t *label;
+    lv_obj_t *labels[4];
+    uint8_t previous_mods;
+    bool initialized;
 };
 
 int zmk_widget_mod_status_init(struct zmk_widget_mod_status *widget, lv_obj_t *parent);

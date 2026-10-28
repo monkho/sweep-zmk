@@ -17,8 +17,9 @@ keyboard bindings, build targets, and Studio options are retained from dongle.
 The existing XIAO overlay has a 240 x 280 panel with y-offset 20. Existing
 horizontal rotation yields a 280 x 240 logical canvas. This layout is for that
 horizontal configuration. `src/theme.h` defines the palette and container styles.
-Output is at (12,12); layer is at (20,86); WPM is at (154,58);
-batteries are at (12,174); modifiers are at (12,214).
+Output is centered at the top with a 12px inset; layer is at (20,86);
+WPM is at (154,58); batteries are at (12,174). Modifiers are centered
+10px above the bottom edge, with four fixed-width labels.
 The embedded UNSCII 8 font supplies small labels; existing Montserrat 40
 supplies large values. No web fonts or browser assets are used.
 
@@ -33,7 +34,8 @@ supplies large values. No web fonts or browser assets are used.
   pairing slots, not guaranteed left/right. Unreported values show `--` and
   gray bars. Existing YADS treats a reported zero as unavailable; distinguishing
   a genuine empty battery from disconnect needs a separate state change.
-- Modifiers: existing HID report mask; CTRL/ALT/GUI/SHFT turn red while active.
+- Modifiers: existing HID report mask; CTRL/ALT/GUI/SHFT turn red while active and remain visible in gray otherwise.
+  Separate labels avoid recolor-markup wrapping and clipping.
   Polling stays at 100 ms but now uses an LVGL timer instead of performing LVGL
   calls in a Zephyr timer interrupt. Unchanged masks skip label updates.
 
@@ -59,3 +61,8 @@ west build -s zmk/app -b xiao_ble//zmk -d build/dongle -- -DZMK_CONFIG=/absolute
 Use the unchanged `build.yaml` matrix for half and reset targets.
 ZMK itself still tracks `main` as in the existing configuration, so full version
 compatibility must be established by the firmware build before flashing.
+
+## Keymap synchronization
+
+`config/cradio.keymap` was restored byte-for-byte from remote `dongle` commit
+`811d167a92a561e0dadda4b7ef304a213d25d2bc`. Other dongle files were not merged.

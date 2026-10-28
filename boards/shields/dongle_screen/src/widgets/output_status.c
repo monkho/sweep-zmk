@@ -51,6 +51,7 @@ static void set_status_symbol(struct zmk_widget_output_status *widget, struct ou
     lv_obj_set_style_text_color(widget->transport_label,
                                connected ? DASH_RED : DASH_MUTED, 0);
     lv_label_set_text(widget->transport_label, usb ? "USB" : "BLE");
+    lv_obj_align(widget->transport_label, LV_ALIGN_TOP_MID, usb ? 0 : -26, 0);
     if (usb) {
         lv_label_set_text(widget->ble_label, "");
     } else {
@@ -77,13 +78,13 @@ ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
 int zmk_widget_output_status_init(struct zmk_widget_output_status *widget, lv_obj_t *parent)
 {
     widget->obj = lv_obj_create(parent);
-    dash_container(widget->obj, 256, 28);
+    dash_container(widget->obj, 100, 28);
 
     widget->transport_label = lv_label_create(widget->obj);
     lv_obj_align(widget->transport_label, LV_ALIGN_TOP_LEFT, 0, 0);
 
     widget->ble_label = lv_label_create(widget->obj);
-    lv_obj_align(widget->ble_label, LV_ALIGN_TOP_LEFT, 40, 0);
+    lv_obj_align(widget->ble_label, LV_ALIGN_TOP_MID, 20, 0);
 
     sys_slist_append(&widgets, &widget->node);
 

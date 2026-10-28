@@ -57,7 +57,7 @@ lv_obj_t *zmk_display_status_screen()
 
 #if CONFIG_DONGLE_SCREEN_OUTPUT_ACTIVE
     zmk_widget_output_status_init(&output_status_widget, screen);
-    lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_LEFT, 12, 12);
+    lv_obj_align(zmk_widget_output_status_obj(&output_status_widget), LV_ALIGN_TOP_MID, 0, 12);
 #endif
 
 #if CONFIG_DONGLE_SCREEN_BATTERY_ACTIVE
@@ -77,7 +77,7 @@ lv_obj_t *zmk_display_status_screen()
 
 #if CONFIG_DONGLE_SCREEN_MODIFIER_ACTIVE
     zmk_widget_mod_status_init(&mod_widget, screen);
-    lv_obj_align(zmk_widget_mod_status_obj(&mod_widget), LV_ALIGN_TOP_LEFT, 12, 214);
+    lv_obj_align(zmk_widget_mod_status_obj(&mod_widget), LV_ALIGN_BOTTOM_MID, 0, -10);
 #endif
 
     lv_obj_t *caption = lv_label_create(screen);
