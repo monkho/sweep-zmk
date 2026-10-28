@@ -6,6 +6,13 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// Layers adapted from benvallack/zmk-config at 84ae125986b18e1e6dfb1f2a6a15777429f29520.
+// Keep numeric indices 1/2: the unchanged base thumb bindings refer to them.
+#define SYMBOLS 1
+#define NUMBERS 2
+#define NAV 3
+#define SYSTEM 4
+
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
 #define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &ht RSHFT k4
@@ -27,6 +34,17 @@
 
 / {
     behaviors {
+        // Space on tap, Right Alt (AltGr) on hold. Separate from home-row timing:
+        // pressing another key immediately resolves the thumb as a modifier.
+        thumb_altgr: thumb_altgr {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
+            bindings = <&kp>, <&kp>;
+        };
+
         ht: hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -41,8 +59,8 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
+            if-layers = <SYMBOLS NUMBERS>;
+            then-layer = <NAV>;
         };
     };
 
@@ -61,62 +79,54 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &kp SPACE  &lt 1 BSPC
+                                            &lt 2 TAB   &kp ENTER     &thumb_altgr RALT SPACE  &lt 1 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
 
-        right_layer {
-            display-name = "Right";
+
+        // Hold the base Backspace thumb. Also hold Tab for NAV.
+        symbols_layer {
+            display-name = "Symbols";
             bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ INSERT   │  1       │  2       │  3       │          │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
-            &kp INS    &kp N1     &kp N2     &kp N3     &trans         &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ DELETE   │  4       │  5       │  6       │          │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-            &kp DEL    &kp N4     &kp N5     &kp N6     &trans         &kp LEFT   &kp DOWN   &kp UP   &kp RIGHT   &kp SEMI
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ CAPS     │  7       │  8       │  9       │  0       │   │          │          │          │          │          │
-           &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         &trans     &trans     &trans     &trans     &trans
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &kp ESC        &trans     &trans
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+                &kp ESC    &kp AT     &kp HASH   &kp DLLR   &kp PRCNT    &kp CARET &kp LT    &kp GT    &kp SEMI  &kp BSPC
+                &kp TAB    &kp EQUAL  &kp LBKT   &kp RBKT   &kp SQT      &kp BSLH  &kp LBRC  &kp RBRC  &kp PIPE  &kp ENTER
+                &kp TILDE  &kp GRAVE  &kp PLUS   &kp MINUS  &kp DQT      &kp AMPS  &kp LPAR  &kp RPAR  &kp UNDER &kp EXCL
+                                               &trans     &trans        &trans    &trans
             >;
         };
 
-        left_layer {
-            display-name = "Left";
+        // Hold the base Tab thumb. Right-hand numpad, left-hand media/math.
+        numbers_layer {
+            display-name = "Numbers";
             bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │  [       │  {       │  }       │    ]     │   │  ^       │  (       │  )       │  ]       │  ~       │
-            &trans     &kp LBKT   &kp LBRC   &kp RBRC   &kp RBKT       &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  !       │  @       │  #       │  $       │  %       │   │  *       │  -       │  =       │  \       │  '"      │
-            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp ASTRK  &kp MINUS  &kp EQUAL  &kp BSLH   &kp SQT
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │          │          │   │  &       │  _       │  +       │  │       │  `       │
-       MEDIA(C_VOL_DN, C_VOL_UP,   C_PREV,     C_PP,    C_NEXT)       &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &kp GRAVE
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &trans         &trans     &trans
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+                &kp ESC    &kp C_PP   &kp C_PREV   &kp C_NEXT   &kp UNDER    &kp MINUS &kp N7 &kp N8 &kp N9 &trans
+                &kp TAB    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp PLUS     &kp EQUAL &kp N4 &kp N5 &kp N6 &kp ENTER
+                &mo SYSTEM &kp AMPS   &kp FSLH     &kp ASTRK    &kp DOT      &kp N0    &kp N1 &kp N2 &kp N3 &kp COMMA
+                                                  &trans      &trans       &trans    &trans
             >;
         };
 
-        tri_layer {
-            display-name = "Tri";
+        // Both base layer thumbs. NAV is managed exclusively by conditional_layers.
+        // Keep layer thumbs transparent: their release must reach the base bindings.
+        navigation_layer {
+            display-name = "Nav Mouse";
             bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ RESET    │          │          │          │PROFILE 0 │   │ Left clk │ Mouse up     │ Right clk│          │  RESET   │
-           &sys_reset  &trans     &trans     &trans    &bt BT_SEL 0    &trans     &mkp MB1   &mmv MOVE_UP   &mkp MB2   &sys_reset
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│BOOTLOADER│          │          │          │PROFILE 1 │   │ Mouse lf        │ Mouse do       │ Mouse ri        │          │BOOTLOADER│
-          &bootloader  &trans    &trans    &trans    &bt BT_SEL 1      &trans     &mmv MOVE_LEFT    &mmv MOVE_DOWN   &mmv MOVE_RIGHT   &bootloader
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │ CLEAR BT │PROFILE 2 │   │ Scroll up    │ Scroll dw       │          │          │          │
-            &studio_unlock     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &msc SCRL_UP   &msc SCRL_DOWN     &trans     &trans     &trans
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &trans         &trans     &trans
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
+                &kp ESC    &msc SCRL_LEFT &mmv MOVE_UP   &msc SCRL_RIGHT &kp F5    &kp LC(LBKT) &kp LC(LS(TAB)) &kp LC(TAB) &kp LC(RBKT) &kp BSPC
+                &kp F1     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &kp DEL   &kp LEFT     &kp DOWN       &kp UP      &kp RIGHT    &kp ENTER
+                &caps_word &mkp MB2       &msc SCRL_UP   &msc SCRL_DOWN  &mkp MB3  &mkp MB1     &kp PG_DN      &kp PG_UP   &kp HOME     &kp END
+                                                       &trans          &trans     &trans        &trans
+            >;
+        };
+
+        // Hold Tab, then hold the bottom-left key (base Z position).
+        system_layer {
+            display-name = "System";
+            bindings = <
+                &kp F1      &kp F2     &kp F3     &kp F4     &bt BT_SEL 0    &kp F5  &kp F6  &kp F7  &kp F8  &kp F9
+                &kp F10     &kp F11    &kp F12    &trans     &bt BT_SEL 1    &trans  &trans  &trans  &trans  &trans
+                &trans      &bt BT_PRV &bt BT_NXT &bt BT_CLR &bt BT_SEL 2    &studio_unlock &trans &trans &sys_reset &bootloader
+                                                 &trans     &trans          &trans  &trans
             >;
         };
     };
