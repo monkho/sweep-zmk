@@ -5,6 +5,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/outputs.h>
+#include "spanish.dtsi"
 
 // Layers adapted from benvallack/zmk-config at 84ae125986b18e1e6dfb1f2a6a15777429f29520.
 // Keep numeric indices 1/2: the unchanged base thumb bindings refer to them.
@@ -12,6 +14,7 @@
 #define NUMBERS 2
 #define NAV 3
 #define SYSTEM 4
+#define SPANISH 5
 
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
@@ -34,15 +37,15 @@
 
 / {
     behaviors {
-        // Space on tap, Right Alt (AltGr) on hold. Separate from home-row timing:
-        // pressing another key immediately resolves the thumb as a modifier.
-        thumb_altgr: thumb_altgr {
+        // Space on tap, Windows Spanish layer on hold.
+        // Resolve as a hold when another key is pressed, including after a space.
+        thumb_spanish: thumb_spanish {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
-            bindings = <&kp>, <&kp>;
+            quick-tap-ms = <0>;
+            bindings = <&mo>, <&kp>;
         };
 
         ht: hold_tap {
@@ -79,7 +82,7 @@
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      &kp M      &kp COMMA  &kp DOT    &kp FSLH
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 2 TAB   &kp ENTER     &thumb_altgr RALT SPACE  &lt 1 BSPC
+                                            &lt 2 TAB   &kp ENTER     &thumb_spanish SPANISH SPACE  &lt 1 BSPC
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -124,9 +127,20 @@
             display-name = "System";
             bindings = <
                 &kp F1      &kp F2     &kp F3     &kp F4     &bt BT_SEL 0    &kp F5  &kp F6  &kp F7  &kp F8  &kp F9
-                &kp F10     &kp F11    &kp F12    &trans     &bt BT_SEL 1    &trans  &trans  &trans  &trans  &trans
+                &kp F10     &kp F11    &kp F12    &kp KP_NUMLOCK &bt BT_SEL 1    &out OUT_USB &out OUT_BLE &out OUT_TOG &trans &trans
                 &trans      &bt BT_PRV &bt BT_NXT &bt BT_CLR &bt BT_SEL 2    &studio_unlock &trans &trans &sys_reset &bootloader
                                                  &trans     &trans          &trans  &trans
+            >;
+        };
+        // Hold the Space thumb. Lowercase characters occupy their base positions.
+        // Uppercase characters are on the top row; do not hold other modifiers.
+        spanish_layer {
+            display-name = "Spanish";
+            bindings = <
+                &es_a_upper &es_e_upper &es_i_upper &es_o_upper &es_u_upper    &es_n_upper &trans &es_u_lower &trans &trans
+                &es_a_lower &trans &trans &trans &trans &trans &es_n_lower &es_e_lower &es_i_lower &es_o_lower
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                                              &trans &trans &trans &trans
             >;
         };
     };

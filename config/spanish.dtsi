@@ -1,0 +1,117 @@
+/* SPDX-License-Identifier: MIT
+ * Windows Alt+numpad entry for Western European (Windows-1252) characters.
+ * Requires Num Lock on and host/app support. Not portable to phones/macOS.
+ * Finish one character before starting another; do not hold other modifiers.
+ */
+/ {
+    macros {
+        es_a_lower: spanish_a_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N2 &kp KP_N5>,
+                       <&macro_release &kp LALT>;
+        };
+        es_e_lower: spanish_e_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N3 &kp KP_N3>,
+                       <&macro_release &kp LALT>;
+        };
+        es_i_lower: spanish_i_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N3 &kp KP_N7>,
+                       <&macro_release &kp LALT>;
+        };
+        es_o_lower: spanish_o_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N4 &kp KP_N3>,
+                       <&macro_release &kp LALT>;
+        };
+        es_u_lower: spanish_u_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N5 &kp KP_N0>,
+                       <&macro_release &kp LALT>;
+        };
+        es_n_lower: spanish_n_lower {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N4 &kp KP_N1>,
+                       <&macro_release &kp LALT>;
+        };
+        es_a_upper: spanish_a_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N1 &kp KP_N9 &kp KP_N3>,
+                       <&macro_release &kp LALT>;
+        };
+        es_e_upper: spanish_e_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N1>,
+                       <&macro_release &kp LALT>;
+        };
+        es_i_upper: spanish_i_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N5>,
+                       <&macro_release &kp LALT>;
+        };
+        es_o_upper: spanish_o_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N1 &kp KP_N1>,
+                       <&macro_release &kp LALT>;
+        };
+        es_u_upper: spanish_u_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N1 &kp KP_N8>,
+                       <&macro_release &kp LALT>;
+        };
+        es_n_upper: spanish_n_upper {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&macro_press &kp LALT>,
+                       <&macro_tap &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N9>,
+                       <&macro_release &kp LALT>;
+        };
+    };
+};

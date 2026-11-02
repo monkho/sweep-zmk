@@ -42,6 +42,13 @@ supplies large values. No web fonts or browser assets are used.
 This pass changes existing widgets only. No WPM history graph, duplicate top
 battery readout, separate layer-number widget, or scanline animation is added.
 
+## Larger status text
+
+USB/BLE, channel and modifier labels use `DASH_STATUS_FONT` (UNSCII 16),
+one available bitmap size above UNSCII 8. Only these labels are enlarged.
+Kconfig selects the additional embedded font. The output container is 160 x 32;
+the modifier container is 256 x 24, with four 64px cells.
+
 ## Validation and build
 
 Static checks cover local includes, unchanged driver/overlay files and build

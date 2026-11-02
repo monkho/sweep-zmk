@@ -34,13 +34,14 @@ static void mod_status_timer_cb(lv_timer_t *timer) {
 
 int zmk_widget_mod_status_init(struct zmk_widget_mod_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
-    dash_container(widget->obj, 256, 18);
+    dash_container(widget->obj, 256, 24);
     static const char *const names[] = {"CTRL", "ALT", "GUI", "SHFT"};
     widget->initialized = false;
     for (int i = 0; i < 4; i++) {
         widget->labels[i] = lv_label_create(widget->obj);
         lv_obj_set_width(widget->labels[i], 64);
-        lv_obj_set_style_text_font(widget->labels[i], &lv_font_unscii_8, 0);
+        lv_obj_set_style_text_font(widget->labels[i], DASH_STATUS_FONT, 0);
+        lv_obj_set_style_text_letter_space(widget->labels[i], 0, 0);
         lv_obj_set_style_text_align(widget->labels[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_label_set_text(widget->labels[i], names[i]);
         lv_obj_set_pos(widget->labels[i], i * 64, 4);
