@@ -149,3 +149,29 @@ your Windows layout as part of this test.
 References: [Windows Alt-number input](https://support.microsoft.com/en-us/word/insert-ascii-or-unicode-latin-based-symbols-and-characters),
 [ZMK macros](https://zmk.dev/docs/keymaps/behaviors/macros),
 [ZMK output selection](https://zmk.dev/docs/keymaps/behaviors/outputs).
+
+## Output selection and connection feedback
+
+Hold the Tab thumb, then hold the base Z position. Check that `Sys` appears.
+While holding those keys, press base H for USB, N for BLE, or E to toggle.
+The existing Tab-thumb timing and System access are retained.
+
+The top line always shows `USB - BLE 1` (or the selected BLE channel number).
+Red is the active, ready output. Underline is the requested output. If BLE is
+requested but its channel is disconnected, the display says `BLE not connected`;
+ZMK may continue using USB. `USB not ready` means the requested USB connection
+isn't ready to accept keyboard input. The requested transport can be saved even
+when no active-endpoint event occurs, so the display checks for changes every
+200 ms on LVGL's thread and redraws only when state changes.
+
+For BLE: select BT1/BT2/BT3 in System, pair/connect the other device on that
+channel, then select BLE. The dongle must remain powered. Output preference
+alone does not pair a host or connect a disconnected host.
+
+If no `Sys` appears or output keys still produce ordinary keys after flashing,
+check for a saved ZMK Studio keymap overriding the compiled bindings. Back up
+Studio edits before restoring the keymap to firmware defaults. This work does
+not clear saved layouts or Bluetooth pairings automatically.
+
+[ZMK output selection](https://zmk.dev/docs/keymaps/behaviors/outputs)
+and [endpoint fallback implementation](https://github.com/zmkfirmware/zmk/blob/main/app/src/endpoints.c).

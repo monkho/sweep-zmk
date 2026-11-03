@@ -15,6 +15,8 @@ struct zmk_widget_output_status
     lv_obj_t *obj;
     lv_obj_t *transport_label;
     lv_obj_t *ble_label;
+    lv_obj_t *separator_label;
+    lv_obj_t *hint_label;
     sys_snode_t node;
 };
 

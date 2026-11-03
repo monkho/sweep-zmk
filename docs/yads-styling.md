@@ -42,12 +42,19 @@ supplies large values. No web fonts or browser assets are used.
 This pass changes existing widgets only. No WPM history graph, duplicate top
 battery readout, separate layer-number widget, or scanline animation is added.
 
-## Larger status text
+## Connection and modifier status text
 
-USB/BLE, channel and modifier labels use `DASH_STATUS_FONT` (UNSCII 16),
-one available bitmap size above UNSCII 8. Only these labels are enlarged.
-Kconfig selects the additional embedded font. The output container is 160 x 32;
-the modifier container is 256 x 24, with four 64px cells.
+The connection line uses UNSCII 16, always showing `USB - BLE n` with the
+selected channel number. The active, ready output is red; the requested output
+is underlined. A small UNSCII 8 hint reports `BLE not connected` or `USB not ready`
+when the requested output cannot be used. The container is 208 x 36, centered
+at the top. State includes both selected and preferred transports. A 200 ms
+LVGL timer catches preference-only changes that don't raise endpoint events;
+unchanged snapshots skip redraws.
+
+Modifiers use Montserrat 14, slightly smaller than the previous UNSCII 16.
+Kconfig explicitly enables both fonts. Their container remains 256 x 24 with
+four 64px cells, and red still highlights held modifiers.
 
 ## Validation and build
 

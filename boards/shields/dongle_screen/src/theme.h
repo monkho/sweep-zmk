@@ -2,6 +2,7 @@
 #pragma once
 #include <lvgl.h>
 #define DASH_STATUS_FONT (&lv_font_unscii_16)
+#define DASH_MODIFIER_FONT (&lv_font_montserrat_14)
 #define DASH_BG lv_color_hex(0x050505)
 #define DASH_TEXT lv_color_hex(0xe6e6e6)
 #define DASH_MUTED lv_color_hex(0x777777)

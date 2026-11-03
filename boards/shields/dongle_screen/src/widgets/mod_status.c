@@ -40,7 +40,7 @@ int zmk_widget_mod_status_init(struct zmk_widget_mod_status *widget, lv_obj_t *p
     for (int i = 0; i < 4; i++) {
         widget->labels[i] = lv_label_create(widget->obj);
         lv_obj_set_width(widget->labels[i], 64);
-        lv_obj_set_style_text_font(widget->labels[i], DASH_STATUS_FONT, 0);
+        lv_obj_set_style_text_font(widget->labels[i], DASH_MODIFIER_FONT, 0);
         lv_obj_set_style_text_letter_space(widget->labels[i], 0, 0);
         lv_obj_set_style_text_align(widget->labels[i], LV_TEXT_ALIGN_CENTER, 0);
         lv_label_set_text(widget->labels[i], names[i]);
