@@ -90,7 +90,7 @@
 
         // Hold the base Backspace thumb. Also hold Tab for NAV.
         symbols_layer {
-            display-name = "Symbols";
+            display-name = "Sym";
             bindings = <
                 &kp ESC    &kp AT     &kp HASH   &kp DLLR   &kp PRCNT    &kp CARET &kp LT    &kp GT    &kp SEMI  &kp BSPC
                 &kp TAB    &kp EQUAL  &kp LBKT   &kp RBKT   &kp SQT      &kp BSLH  &kp LBRC  &kp RBRC  &kp PIPE  &kp ENTER
@@ -101,7 +101,7 @@
 
         // Hold the base Tab thumb. Right-hand numpad, left-hand media/math.
         numbers_layer {
-            display-name = "Numbers";
+            display-name = "Num";
             bindings = <
                 &kp ESC    &kp C_PP   &kp C_PREV   &kp C_NEXT   &kp UNDER    &kp MINUS &kp N7 &kp N8 &kp N9 &trans
                 &kp TAB    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp PLUS     &kp EQUAL &kp N4 &kp N5 &kp N6 &kp ENTER
@@ -113,7 +113,7 @@
         // Both base layer thumbs. NAV is managed exclusively by conditional_layers.
         // Keep layer thumbs transparent: their release must reach the base bindings.
         navigation_layer {
-            display-name = "Nav Mouse";
+            display-name = "Mouse";
             bindings = <
                 &kp ESC    &msc SCRL_LEFT &mmv MOVE_UP   &msc SCRL_RIGHT &kp F5    &kp LC(LBKT) &kp LC(LS(TAB)) &kp LC(TAB) &kp LC(RBKT) &kp BSPC
                 &kp F1     &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &kp DEL   &kp LEFT     &kp DOWN       &kp UP      &kp RIGHT    &kp ENTER
@@ -124,7 +124,7 @@
 
         // Hold Tab, then hold the bottom-left key (base Z position).
         system_layer {
-            display-name = "System";
+            display-name = "Sys";
             bindings = <
                 &kp F1      &kp F2     &kp F3     &kp F4     &bt BT_SEL 0    &kp F5  &kp F6  &kp F7  &kp F8  &kp F9
                 &kp F10     &kp F11    &kp F12    &kp KP_NUMLOCK &bt BT_SEL 1    &out OUT_USB &out OUT_BLE &out OUT_TOG &trans &trans
@@ -135,7 +135,7 @@
         // Hold the Space thumb. Lowercase characters occupy their base positions.
         // Uppercase characters are on the top row; do not hold other modifiers.
         spanish_layer {
-            display-name = "Spanish";
+            display-name = "Spa";
             bindings = <
                 &es_a_upper &es_e_upper &es_i_upper &es_o_upper &es_u_upper    &es_n_upper &trans &es_u_lower &trans &trans
                 &es_a_lower &trans &trans &trans &trans &trans &es_n_lower &es_e_lower &es_i_lower &es_o_lower
