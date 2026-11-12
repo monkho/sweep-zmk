@@ -15,6 +15,8 @@
 #define NAV 3
 #define SYSTEM 4
 #define SPANISH 5
+#define GAME 6
+#define GAME_MOUSE 7
 
 // Home row mods macro
 #define HRML(k1,k2,k3,k4) &ht LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
@@ -127,7 +129,7 @@
             display-name = "Sys";
             bindings = <
                 &kp F1      &kp F2     &kp F3     &kp F4     &bt BT_SEL 0    &kp F5  &kp F6  &kp F7  &kp F8  &kp F9
-                &kp F10     &kp F11    &kp F12    &kp KP_NUMLOCK &bt BT_SEL 1    &out OUT_USB &out OUT_BLE &out OUT_TOG &trans &trans
+                &kp F10     &kp F11    &kp F12    &kp KP_NUMLOCK &bt BT_SEL 1    &out OUT_USB &out OUT_BLE &out OUT_TOG &trans &to GAME
                 &trans      &bt BT_PRV &bt BT_NXT &bt BT_CLR &bt BT_SEL 2    &studio_unlock &trans &trans &sys_reset &bootloader
                                                  &trans     &trans          &trans  &trans
             >;
@@ -141,6 +143,28 @@
                 &es_a_lower &trans &trans &trans &trans &trans &es_n_lower &es_e_lower &es_i_lower &es_o_lower
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
                                               &trans &trans &trans &trans
+            >;
+        };
+
+        // Direct keypresses for gaming. System and Game share the exit/entry position.
+        game_layer {
+            display-name = "Game";
+            bindings = <
+                &kp ESC   &kp Q    &kp W    &kp E    &kp R      &kp Y     &kp U &kp I &kp O &kp P
+                &kp LSHFT &kp A    &kp S    &kp D    &kp F      &kp LSHFT &kp H &kp J &kp K &to 0
+                &kp LCTRL &kp N1   &kp N2   &kp N3   &mkp MB1   &kp LCTRL &kp B &kp N &kp M &kp FSLH
+                                           &kp SPACE &mo GAME_MOUSE     &kp ENTER &kp BSPC
+            >;
+        };
+
+        // Hold the second left thumb for pointer control on the movement cluster.
+        game_mouse_layer {
+            display-name = "GMouse";
+            bindings = <
+                &trans &mkp MB1       &mmv MOVE_UP   &mkp MB2        &mkp MB3    &trans &trans &trans &trans &trans
+                &trans &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT &trans      &trans &trans &trans &trans &trans
+                &trans &msc SCRL_UP   &msc SCRL_DOWN &trans          &trans      &trans &trans &trans &trans &trans
+                                                     &trans          &trans      &trans &trans
             >;
         };
     };

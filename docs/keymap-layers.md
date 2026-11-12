@@ -18,12 +18,15 @@ flowchart TD
     N -->|"Also hold Backspace thumb"| V
     N -->|"Hold bottom-left key: base Z position"| Y
     B -->|"Hold Space thumb"| ES["5 · Spanish — Windows accents"]
+    Y -->|"Press base O position"| G["6 · Game"]
+    G -->|"Hold left Enter thumb"| GM["7 · Game Mouse"]
+    G -->|"Press base O position"| B
 ```
 
-All layer access is momentary. Release the layer keys to return to Base.
+Typing layers are momentary. Game mode stays active until you exit it. Release the layer keys to return to Base.
 From Nav Mouse, releasing Tab leaves Symbols; releasing Backspace leaves
 Numbers. Releasing both leaves Base. From System, release Z to return to
-Numbers; release both Z and Tab to return to Base. There are no latched layers.
+Numbers; release both Z and Tab to return to Base.
 Nav Mouse is activated only by the existing conditional-layer mechanism.
 
 ## What changed from the reference
@@ -81,7 +84,7 @@ Thumbs: trans | trans | trans | trans
 
 ```text
 F1   F2      F3      F4      BT1 | F5      F6      F7      F8     F9
-F10  F11     F12     NumLock BT2 | USB     BLE     Toggle  trans  trans
+F10  F11     F12     NumLock BT2 | USB     BLE     Toggle  trans  Game
 trans BTprev BTnext  BTclear BT3 | Studio  trans   trans   Reset  Boot
               trans trans       | trans   trans
 ```
@@ -99,7 +102,7 @@ Reset restarts the dongle; Bootloader enters flashing mode.
 
 ## Validation
 
-Static validation checks that all six layers contain 34 bindings, the base
+Static validation checks that all eight layers contain 34 bindings, the base
 letter bindings and home-row behavior match the previous version, all referenced layers
 exist, and layer-hold positions remain transparent on overlays. Keycode names
 are checked against the current official ZMK headers. A firmware build and
@@ -175,3 +178,33 @@ not clear saved layouts or Bluetooth pairings automatically.
 
 [ZMK output selection](https://zmk.dev/docs/keymaps/behaviors/outputs)
 and [endpoint fallback implementation](https://github.com/zmkfirmware/zmk/blob/main/app/src/endpoints.c).
+
+## 6 · Game — open System, then press the base O position
+
+Hold Tab and the base Z position to open System. Press the far-right home-row
+key (base O) and release the held keys. Press that same far-right key in Game
+to return to Base.
+
+```text
+Esc    Q      W      E      R      | Y      U     I     O     P
+Shift  A      S      D      F      | Shift  H     J     K     Exit
+Ctrl   1      2      3      LClick | Ctrl   B     N     M     /
+                     Space  Mouse  | Enter  Bksp
+```
+
+Use WASD for movement, Space to jump, Shift to sneak, Ctrl to sprint, E for
+inventory, Q to drop, and 1–3 for the first three hotbar slots. Both halves
+have direct Shift and Ctrl on the outer home-row and bottom-row positions.
+The layout sends standard keycodes. If the Windows layout changes the game's
+bindings, set them in Minecraft using the keys shown above.
+
+## 7 · Game Mouse — hold the second left thumb in Game
+
+```text
+▽      LClick  Mouse↑  RClick  MClick | ▽  ▽  ▽  ▽  ▽
+▽      Mouse←  Mouse↓  Mouse→  ▽      | ▽  ▽  ▽  ▽  ▽
+▽      Scr↑    Scr↓    ▽       ▽      | ▽  ▽  ▽  ▽  ▽
+                       ▽       ▽      | ▽  ▽
+```
+
+`▽` keeps the underlying Game binding. Release the thumb to return to movement.
